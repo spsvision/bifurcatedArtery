@@ -16,7 +16,7 @@ The remaining video results are found in the user_files directory
 
 * [WorkBench 2020 R1](https://www.ansys.com/products/platform) - CAE simulation framework used
 * [Ansys Fluent](https://www.ansys.com/products/fluids/ansys-fluent) - Fluid Flow CFD software
-* [CFD-Post](https://www.ozeninc.com/products/fluid-dynamics/ansys-cfd-post/) - Results post processor
+* [CFD-Post](https://www.ozeninc.com/products/fluid-dynamics/ansys-cfd-post/) - Results post-processor
 
 ## License
 
