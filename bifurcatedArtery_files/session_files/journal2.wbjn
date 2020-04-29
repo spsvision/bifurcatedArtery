@@ -1,0 +1,154 @@
+# encoding: utf-8
+# 2020 R1
+SetScriptVersion(Version="20.1.164")
+system1 = GetSystem(Name="Post")
+results1 = system1.GetContainer(ComponentName="Results")
+results1.Edit()
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:wallartery, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:wallartery, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:outlet2, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:outlet2, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /VECTOR:velVector, view=/VIEW:View 1""")
+results1.SendCommand(Command=">centerview 1")
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00320359, 0.00261635, -0.00339829
+    Scale = 41.5008
+    Pan = 0, 0
+    Rotation Quaternion = -0.225248, 0.278304, -0.0455491, -0.932601
+    
+  END
+
+END
+
+> update
+>centerview 1""")
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00320359, 0.00261635, -0.00339829
+    Scale = 48.5014
+    Pan = 0, 0
+    Rotation Quaternion = -0.161887, 0.280958, -0.065161, -0.943725
+    
+  END
+
+END
+
+> update
+# Sending visibility action from ViewUtilities
+>show /PARTICLE TRACK:FLUENT PT for Massless, view=/VIEW:View 1""")
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00320359, 0.00261635, -0.00339829
+    Scale = 48.5014
+    Pan = 0, 0
+    Rotation Quaternion = -0.207584, 0.13662, 0.206358, -0.9464
+    
+  END
+
+END
+
+> update
+>centerview 1""")
+results1.SendCommand(Command="""HARDCOPY:
+Antialiasing = On
+Hardcopy Filename = C:/Users/SPS VISION/Downloads/Ansys/bifurcatedArtery_files/user_files/ivelocity_vectors.png
+Hardcopy Format = png
+Hardcopy Tolerance = 0.0001
+Image Height = 600
+Image Scale = 100
+Image Width = 600
+JPEG Image Quality = 80
+Screen Capture = Off
+Use Screen Size = On
+White Background = Off
+END
+>print""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /PARTICLE TRACK:FLUENT PT for Massless, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00320359, 0.00260817, -0.00339829
+    Scale = 48.7517
+    Pan = 0, 0
+    Rotation Quaternion = -0.446939, -0.537274, -0.561022, -0.443678
+    
+  END
+
+END
+
+> update
+>centerview 1""")
+results1.SendCommand(Command="""HARDCOPY:
+Antialiasing = On
+Hardcopy Filename = C:/Users/SPS VISION/Downloads/Ansys/bifurcatedArtery_files/user_files/wall_shear.png
+Hardcopy Format = png
+Hardcopy Tolerance = 0.0001
+Image Height = 600
+Image Scale = 100
+Image Width = 600
+JPEG Image Quality = 80
+Screen Capture = Off
+Use Screen Size = On
+White Background = On
+END
+>print""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /VECTOR:velVector, view=/VIEW:View 1""")
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00320359, 0.00261635, -0.00339829
+    Scale = 46.8879
+    Pan = 0, 0
+    Rotation Quaternion = 0.011109, 0.760445, 0.389123, 0.519808
+    
+  END
+
+END
+
+> update
+>centerview 1""")
+results1.SendCommand(Command="""HARDCOPY:
+Antialiasing = On
+Hardcopy Filename = C:/Users/SPS VISION/Downloads/Ansys/bifurcatedArtery_files/user_files/wireframe.png
+Hardcopy Format = png
+Hardcopy Tolerance = 0.0001
+Image Height = 600
+Image Scale = 100
+Image Width = 600
+JPEG Image Quality = 80
+Screen Capture = Off
+Use Screen Size = On
+White Background = On
+END
+>print""")
+results1.Exit()
+Save(Overwrite=True)
+system2 = GetSystem(Name="FFF")
+geometry1 = system2.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+Save(Overwrite=True)
+Open(FilePath="C:/Users/SPS VISION/Downloads/Ansys/airfoilNACA0012.wbpj")

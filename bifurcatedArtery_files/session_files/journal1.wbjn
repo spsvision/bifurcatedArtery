@@ -1,0 +1,987 @@
+# encoding: utf-8
+# 2019 R1
+SetScriptVersion(Version="19.3.111")
+template1 = GetTemplate(TemplateName="Fluid Flow")
+system1 = template1.CreateSystem()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+geometry1.Exit()
+system1.DisplayText = "Bifurcating Artery"
+geometry1.SetFile(FilePath="D:/SPSProjects/ANSYS_projects/bif_artery.STEP")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+geometry1.Exit()
+meshComponent1 = system1.GetComponent(Name="Mesh")
+meshComponent1.Refresh()
+mesh1 = system1.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+Save(Overwrite=True)
+mesh1.Exit()
+mesh1.Edit()
+setup1 = system1.GetContainer(ComponentName="Setup")
+fluentLauncherSettings1 = setup1.GetFluentLauncherSettings()
+fluentLauncherSettings1.SetEntityProperties(Properties=Set(Dimension="ThreeD", Precision="Double", EnvPath={}, RunParallel=True, NumberOfProcessors=2))
+setup1.Edit()
+mesh1.Exit()
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*FileMenu*Close Fluent")')
+meshComponent1.Update(AllDependencies=True)
+Save(Overwrite=True)
+setupComponent1 = system1.GetComponent(Name="Setup")
+setupComponent1.Refresh()
+fluentLauncherSettings1.SetEntityProperties(Properties=Set(EnvPath={}))
+setup1.Edit()
+setup1.SendCommand(Command='(cx-gui-do cx-set-toggle-button2 "General*Table1*Table2(Solver)*ToggleBox5(Time)*Transient" #t)(cx-gui-do cx-activate-item "General*Table1*Table2(Solver)*ToggleBox5(Time)*Transient")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "ToolBar*Pointer Tools*rotate")')
+setup1.SendCommand(Command="(cx-use-window-id 1)(cx-set-camera-relative '(0.0149576 -0.0600481 0.0353442) '(0 0 0) '(0.23187 0.242267 0.336272) 0 0)(cx-gui-do cx-set-list-tree-selections \"NavigationPane*List_Tree1\" (list ))(cx-gui-do cx-set-list-tree-selections \"NavigationPane*List_Tree1\" (list \"Setup|Materials|Fluid|air\"))")
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|air"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-tree-selections \"NavigationPane*List_Tree1\" (list \"Setup|Materials|Fluid|air\"))(cx-gui-do cx-set-text-entry \"Create/Edit Materials*Table1*Frame1*Table1*TextEntry1(Name)\" \"blood\")(cx-gui-do cx-set-real-entry-list \"Create/Edit Materials*RealEntry10\" '( 1060))(cx-gui-do cx-set-list-selections \"Create/Edit Materials*Table2*Table1(Properties)*DropDownList7(Viscosity)\" '( 9))(cx-gui-do cx-activate-item \"Create/Edit Materials*Table2*Table1(Properties)*DropDownList7(Viscosity)\")(cx-gui-do cx-set-real-entry-list \"Carreau Model*Table1*Table2*RealEntry1(Time Constant, lambda)\" '( 3.313))(cx-gui-do cx-set-real-entry-list \"Carreau Model*Table1*Table2*RealEntry2(Power-Law Index, n)\" '( 0.3568))(cx-gui-do cx-set-real-entry-list \"Carreau Model*Table1*Table2*RealEntry3(Zero Shear Viscosity)\" '( 0.056))(cx-gui-do cx-set-real-entry-list \"Carreau Model*Table1*Table2*RealEntry4(Infinite Shear Viscosity)\" '( 0.0035))(cx-gui-do cx-activate-item \"Carreau Model*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Question*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton3(Change/Create)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton3(Change/Create)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton1(Close)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton1(Close)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame4(User-Defined)*Table1*Table3(User Defined)*PushButton1(Functions)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuFunctions*Compiled...")')
+setup1.SendCommand(Command="(cx-gui-do cx-activate-item \"Compiled UDFs*Table1*Frame1*Frame2*PushButton1( Add)\")(cx-gui-do cx-set-file-dialog-entries \"Select File\" '( \"D:/SPSProjects/ANSYS_projects/vinlet_udf.c\") \"Source Files (*.c *.cpp )\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Compiled UDFs*Frame8*PushButton2(Build)")(cx-gui-do cx-activate-item "Question*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Compiled UDFs*Frame8*PushButton2(Build)")(cx-gui-do cx-activate-item "Question*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Compiled UDFs*PanelButtons*PushButton1(OK)")(cx-gui-do cx-activate-item "Error*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*FileMenu*Close Fluent")')
+fluentLauncherSettings1.SetEntityProperties(Properties=Set(EnvPath={}, RunParallel=False))
+setup1.Edit()
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Materials|Fluid|blood"))(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton1(Close)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Boundary Conditions"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Boundary Conditions"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Boundary Conditions"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Setup|Boundary Conditions"))')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame4(User-Defined)*Table1*Table3(User Defined)*PushButton1(Functions)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuFunctions*Compiled...")')
+setup1.SendCommand(Command="(cx-gui-do cx-activate-item \"Compiled UDFs*Table1*Frame1*Frame2*PushButton1( Add)\")(cx-gui-do cx-set-file-dialog-entries \"Select File\" '( \"D:/SPSProjects/ANSYS_projects/vinlet_udf.c\") \"Source Files (*.c *.cpp )\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Compiled UDFs*Frame8*PushButton2(Build)")(cx-gui-do cx-activate-item "Question*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Compiled UDFs*PanelButtons*PushButton1(OK)")(cx-gui-do cx-activate-item "Error*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame4(User-Defined)*Table1*Table3(User Defined)*PushButton1(Functions)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuFunctions*Interpreted...")')
+setup1.SendCommand(Command="(cx-gui-do cx-activate-item \"Interpreted UDFs*Table1*PushButton3(Browse)\")(cx-gui-do cx-set-file-dialog-entries \"Select File\" '( \"D:/SPSProjects/ANSYS_projects/vinlet_udf.c\") \"UDF Source Files (*.c)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Interpreted UDFs*PanelButtons*PushButton1(OK)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Interpreted UDFs*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Boundary Conditions*Table1*List2(Zone)\" '( 0))(cx-gui-do cx-activate-item \"Boundary Conditions*Table1*List2(Zone)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Boundary Conditions*Table1*Table3*Table4*ButtonBox1*PushButton1(Edit)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-expression-entry \"Velocity Inlet*Frame3*Frame1(Momentum)*Table1*Table8*ExpressionEntry1(Velocity Magnitude)\" '(\"udf inlet_velocity\" . 2))(cx-gui-do cx-activate-item \"Velocity Inlet*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Boundary Conditions*Table1*List2(Zone)\" '( 2))(cx-gui-do cx-activate-item \"Boundary Conditions*Table1*List2(Zone)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Boundary Conditions*Table1*Table3*Table4*ButtonBox1*PushButton1(Edit)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-expression-entry \"Pressure Outlet*Frame3*Frame1(Momentum)*Table1*Table6*ExpressionEntry1(Gauge Pressure)\" '(\"0\" . 0))(cx-gui-do cx-set-expression-entry \"Pressure Outlet*Frame3*Frame1(Momentum)*Table1*Table6*ExpressionEntry1(Gauge Pressure)\" '(\"13332\" . 0))(cx-gui-do cx-activate-item \"Pressure Outlet*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Boundary Conditions*Table1*List2(Zone)\" '( 3))(cx-gui-do cx-activate-item \"Boundary Conditions*Table1*List2(Zone)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Boundary Conditions*Table1*Table3*Table4*ButtonBox1*PushButton1(Edit)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-expression-entry \"Pressure Outlet*Frame3*Frame1(Momentum)*Table1*Table6*ExpressionEntry1(Gauge Pressure)\" '(\"13332\" . 0))(cx-gui-do cx-activate-item \"Pressure Outlet*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Boundary Conditions*Table1*Table3*Table4*Table2*PushButton2(Operating Conditions)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Operating Conditions*PanelButtons*PushButton1(OK)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Boundary Conditions*Table1*List2(Zone)\" '( 4))(cx-gui-do cx-activate-item \"Boundary Conditions*Table1*List2(Zone)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame3(Physics)*Table1*Table3(Models)*PushButton10(More)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame3(Physics)*Table1*Table3(Models)*PushButton10(More)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Ribbon*Frame1*Frame3(Physics)*Table1*Table3(Model Specific)*PushButton1(Discrete Phase)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuDiscretePhase*Injections...")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Injections*ButtonBox6*PushButton1(Create)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-toggle-button2 \"Set Injection Properties*Frame2*Frame1*ToggleBox1(Particle Type)*Massless\" #t)(cx-gui-do cx-activate-item \"Set Injection Properties*Frame2*Frame1*ToggleBox1(Particle Type)*Massless\")(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry6\" '(\"0.01\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry6\" '(\"0.0011\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry6\" '(\"0.001183\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0.0064\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0.006242\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"0\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318313\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318313\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318313\" . 0))(cx-gui-do cx-activate-item \"Set Injection Properties*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Injections*ButtonBox6*PushButton1(Create)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-toggle-button2 \"Set Injection Properties*Frame2*Frame1*ToggleBox1(Particle Type)*Massless\" #t)(cx-gui-do cx-activate-item \"Set Injection Properties*Frame2*Frame1*ToggleBox1(Particle Type)*Massless\")(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318313\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry18\" '(\"-0.0318313\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry6\" '(\"0\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry6\" '(\"0.002758\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0.004538\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0.004548\" . 0))(cx-gui-do cx-set-expression-entry \"Set Injection Properties*Frame4*Frame1*Frame1(Point Properties)*Frame2*Frame1*Table1*ExpressionEntry12\" '(\"0.004548\" . 0))(cx-gui-do cx-activate-item \"Set Injection Properties*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Injections*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Plots"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Plots"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Plots"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Reports"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Reports"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Results|Reports"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Initialization"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))(cx-gui-do cx-list-tree-right-click "NavigationPane*List_Tree1" )(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Plots"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files"))(cx-gui-do cx-list-tree-right-click "NavigationPane*List_Tree1" )')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuTree-Report Files*New...")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "New Report File*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Plots"))(cx-gui-do cx-list-tree-right-click "NavigationPane*List_Tree1" )')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuTree-Report Plots*New...")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "New Report Plot*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Residual"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Residual"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Residual"))(cx-gui-do cx-activate-item "Residual Monitors*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Initialization"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Initialization"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Initialization"))(cx-gui-do cx-set-toggle-button2 "Solution Initialization*Table1*ToggleBox3(Initialization Methods)*Hybrid  Initialization" #t)(cx-gui-do cx-activate-item "Solution Initialization*Table1*ToggleBox3(Initialization Methods)*Hybrid  Initialization")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Solution Initialization*Table1*Frame11*PushButton2(Initialize)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Plots"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Plots"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Plots"))')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Report Plot Definitions*Table1*ButtonBox3*PushButton1(New)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "New Report Plot*PanelButtons*PushButton2(Cancel)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Report Plot Definitions*PanelButtons*PushButton1(Close)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files"))')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Report File Definitions*Table1*ButtonBox3*PushButton1(New)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "New Report File*Table1*Table5*PushButton1(New)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*Force ReportSubMenu*Drag...")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Drag Report Definition*Table1*Table2*List2(Wall Zones)\" '( 0))(cx-gui-do cx-activate-item \"Drag Report Definition*Table1*Table2*List2(Wall Zones)\")(cx-gui-do cx-activate-item \"Drag Report Definition*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "New Report File*PanelButtons*PushButton1(OK)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Report File Definitions*PanelButtons*PushButton1(Close)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files|report-file-0"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files|report-file-0"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files|report-file-0"))(cx-gui-do cx-set-text-entry "Edit Report File*Table1*Table1*TextEntry1(Name)" "drag")(cx-gui-do cx-activate-item "Edit Report File*Table1*Table1*TextEntry1(Name)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Edit Report File*PanelButtons*PushButton1(OK)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Monitors|Report Files|drag"))(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Calculation Activities*ButtonBox4*PushButton1(Create)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Calculation Activities*ButtonBox4*PushButton1(Create)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuAutomaticExport*Solution Data Export...")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table2*DropDownList1(File Type)\" '( 2))")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Automatic Export*Table1*Table2*DropDownList1(File Type)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-integer-entry "Automatic Export*Table1*Frame6*IntegerEntry1(Export Data Every)" 5)(cx-gui-do cx-activate-item "Automatic Export*Table1*Frame6*IntegerEntry1(Export Data Every)")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 9))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 9 10))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 9 10 11))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 9 10 11 37))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 0 9 10 11 37))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 0 4 9 10 11 37))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-set-list-selections \"Automatic Export*Table1*Table5*List1(Quantities)\" '( 0 4 8 9 10 11 37))(cx-gui-do cx-activate-item \"Automatic Export*Table1*Table5*List1(Quantities)\")(cx-gui-do cx-activate-item \"Automatic Export*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))(cx-gui-do cx-list-tree-right-click "NavigationPane*List_Tree1" )(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Calculation Activities"))')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Calculation Activities*ButtonBox4*PushButton1(Create)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*PopupMenuAutomaticExport*Particle History Data Export...")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-selections \"Automatic Particle History Data Export*Table1*Table2*List2(Injections)\" '( 0))(cx-gui-do cx-activate-item \"Automatic Particle History Data Export*Table1*Table2*List2(Injections)\")(cx-gui-do cx-set-list-selections \"Automatic Particle History Data Export*Table1*Table2*List2(Injections)\" '( 0 1))(cx-gui-do cx-activate-item \"Automatic Particle History Data Export*Table1*Table2*List2(Injections)\")(cx-gui-do cx-activate-item \"Automatic Particle History Data Export*PanelButtons*PushButton1(OK)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Run Calculation"))')
+setup1.SendCommand(Command='(cx-gui-do cx-set-list-tree-selections "NavigationPane*List_Tree1" (list "Solution|Run Calculation"))(cx-gui-do cx-activate-item "NavigationPane*List_Tree1")')
+setup1.SendCommand(Command="(cx-gui-do cx-set-list-tree-selections \"NavigationPane*List_Tree1\" (list \"Solution|Run Calculation\"))(cx-gui-do cx-set-expression-entry \"Run Calculation*Table1*Table7*ExpressionEntry1(Time Step Size)\" '(\"0.01\" . 0))(cx-gui-do cx-activate-item \"Run Calculation*Table1*Table7*ExpressionEntry1(Time Step Size)\")")
+setup1.SendCommand(Command='(cx-gui-do cx-set-integer-entry "Run Calculation*Table1*Table7*IntegerEntry2(Number of Time Steps)" 50)(cx-gui-do cx-activate-item "Run Calculation*Table1*Table7*IntegerEntry2(Number of Time Steps)")')
+setup1.SendCommand(Command='(cx-gui-do cx-set-integer-entry "Run Calculation*Table1*IntegerEntry10(Number of Iterations)" 200)(cx-gui-do cx-activate-item "Run Calculation*Table1*IntegerEntry10(Number of Iterations)")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Run Calculation*Table1*PushButton22(Calculate)")')
+Save(Overwrite=True)
+results1 = system1.GetContainer(ComponentName="Results")
+results1.Edit()
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "Information*OK")')
+setup1.SendCommand(Command='(cx-gui-do cx-activate-item "MenuBar*FileMenu*Close Fluent")')
+results1.Exit()
+results1.Edit()
+results1.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.279848, -0.364705, -0.115917, 0.880476
+    
+  END
+
+END
+
+VIEW:View 1
+  Light Angle = 50, 110
+END
+
+VIEW:View 2
+  Light Angle = 50, 110
+END
+
+VIEW:View 3
+  Light Angle = 50, 110
+END
+
+VIEW:View 4
+  Light Angle = 50, 110
+END
+
+> update
+# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case Bifurcating Artery/BOUNDARY:inlet1, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case Bifurcating Artery/BOUNDARY:wallartery, view=/VIEW:View 1""")
+results1.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /DATA READER/CASE:Case Bifurcating Artery/BOUNDARY:inlet1, view=/VIEW:View 1""")
+results1.Exit()
+template2 = GetTemplate(TemplateName="Results")
+system2 = template2.CreateSystem(
+    Position="Below",
+    RelativeTo=system1)
+results2 = system2.GetContainer(ComponentName="Results")
+results2.Edit()
+results2.SendCommand(Command="""DATA READER:
+  Clear All Objects = false
+  Append Results = true
+  Edit Case Names = false
+  Multi Configuration File Load Option = Last Case
+  Open in New View = true
+  Keep Camera Position = true
+  Load Particle Tracks = true
+  Multi Configuration File Load Option = Last Case
+  Construct Variables From Fourier Coefficients = true
+  Open to Compare = false
+  Files to Compare = 
+END
+
+>load filename=D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/dp0/FFF/Fluent/FFF-Setup-Output-0005.cas, force_reload=true""")
+results2.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.279848, -0.364705, -0.115917, 0.880476
+    
+  END
+
+END
+
+> update
+>undo""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:wallartery, view=/VIEW:View 1""")
+results2.SendCommand(Command="> autolegend plot=/DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:wallartery, view=VIEW:View 1")
+results2.SendCommand(Command="""DATA READER:
+      CASE:Case FFF Setup Output 0005
+    BOUNDARY:wallartery
+Apply Instancing Transform = On
+Apply Texture = Off
+Colour = 0.2, 0.5, 1
+Colour Map = Default Colour Map
+Colour Mode = Constant
+Colour Scale = Linear
+Colour Variable = Pressure
+Colour Variable Boundary Values = Conservative
+Culling Mode = No Culling
+Draw Faces = On
+Draw Lines = Off
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Max = 0.0
+Min = 0.0
+Range = Global
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Transparency = 0.7
+      OBJECT VIEW TRANSFORM:
+      Apply Reflection = Off
+      Apply Rotation = Off
+      Apply Scale = Off
+      Apply Translation = Off
+      Principal Axis = Z
+      Reflection Plane Option = XY Plane
+      Rotation Angle = 0.0 [degree]
+      Rotation Axis From = 0 [m], 0 [m], 0 [m]
+      Rotation Axis To = 0 [m], 0 [m], 0 [m]
+      Rotation Axis Type = Principal Axis
+      Scale Vector = 1 , 1 , 1 
+      Translation Vector = 0 [m], 0 [m], 0 [m]
+      X = 0.0 [m]
+      Y = 0.0 [m]
+      Z = 0.0 [m]
+      END
+    END
+  END
+END
+# Sending visibility action from ViewUtilities
+>show /DATA READER/CASE:Case FFF Setup Output 0005/BOUNDARY:wallartery, view=/VIEW:View 1""")
+results2.SendCommand(Command="> autolegend plot=/VECTOR:velVector, view=VIEW:View 1")
+results2.SendCommand(Command="""VECTOR:velVector
+Apply Instancing Transform = On
+Colour = 0.75, 0.75, 0.75
+Colour Map = Default Colour Map
+Colour Mode = Use Plot Variable
+Colour Scale = Linear
+Colour Variable = Velocity
+Colour Variable Boundary Values = Conservative
+Coord Frame = Global
+Culling Mode = No Culling
+Direction = X
+Domain List = /DOMAIN GROUP:All Domains
+Draw Faces = On
+Draw Lines = Off
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Line Width = 1
+Location List = fluidzone
+Locator Sampling Method = Vertex
+Max = 0.0 [m s^-1]
+Maximum Number of Items = 100
+Min = 0.0 [m s^-1]
+Normalized = Off
+Number of Samples = 100
+Projection Type = None
+Random Seed = 1
+Range = Global
+Reduction Factor = 1.0
+Reduction or Max Number = Reduction
+Sample Spacing = 0.1
+Sampling Aspect Ratio = 1
+Sampling Grid Angle = 0 [degree]
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Symbol = Line Arrow
+Symbol Size = 1.0
+Transparency = 0.0
+Variable = Velocity
+Variable Boundary Values = Conservative
+  OBJECT VIEW TRANSFORM:
+  Apply Reflection = Off
+  Apply Rotation = Off
+  Apply Scale = Off
+  Apply Translation = Off
+  Principal Axis = Z
+  Reflection Plane Option = XY Plane
+  Rotation Angle = 0.0 [degree]
+  Rotation Axis From = 0 [m], 0 [m], 0 [m]
+  Rotation Axis To = 0 [m], 0 [m], 0 [m]
+  Rotation Axis Type = Principal Axis
+  Scale Vector = 1 , 1 , 1 
+  Translation Vector = 0 [m], 0 [m], 0 [m]
+  X = 0.0 [m]
+  Y = 0.0 [m]
+  Z = 0.0 [m]
+  END
+END""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /VECTOR:velVector, view=/VIEW:View 1""")
+results2.SendCommand(Command="""HARDCOPY:
+Antialiasing = On
+Hardcopy Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/initialArteryFlow.png
+Hardcopy Format = png
+Hardcopy Tolerance = 0.0001
+Image Height = 600
+Image Scale = 100
+Image Width = 600
+JPEG Image Quality = 80
+Screen Capture = Off
+Use Screen Size = On
+White Background = Off
+END
+>print""")
+results2.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.261743, -0.82928, -0.294972, 0.395952
+    
+  END
+
+END
+
+> update
+# Sending visibility action from ViewUtilities
+>hide /VECTOR:velVector, view=/VIEW:View 1""")
+results2.SendCommand(Command=">import filename=D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/dp0/FFF/Fluent/default.xml, type=FLUENT PT, visibility=On")
+results2.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.319193, -0.781119, -0.491607, 0.215157
+    
+  END
+
+END
+
+> update
+> autolegend plot=/PARTICLE TRACK:FLUENT PT for Massless, view=VIEW:View 1""")
+results2.SendCommand(Command="""PARTICLE TRACK:FLUENT PT for Massless
+Activate Filter = Off
+Any All Condition = Match ALL
+Apply Instancing Transform = On
+Colour = 0.75, 0.75, 0.75
+Colour Map = Default Colour Map
+Colour Mode = Variable
+Colour Scale = Linear
+Colour Variable = Velocity
+Colour Variable Boundary Values = Conservative
+Culling Mode = No Culling
+Domain List = /DOMAIN GROUP:All Domains
+Draw Faces = On
+Draw Lines = Off
+Draw Symbols = Off
+Draw Tracks = On
+Filter On Diameter = Off
+Filter On End = Off
+Filter On Start = Off
+Filter On Track Selection = Off
+Font = Sans Serif
+Injection Filter = injection-0,injection-1
+Input File = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/dp0/FFF/Fluent/default.xml
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Limit Track Option = Up To Current Timestep
+Line Width = 1
+Max = 0.0 [m s^-1]
+Maximum Number of Tracks = 25
+Min = 0.0 [m s^-1]
+Number of Sides = 8
+Option = From File
+Particle Diameter = 3.40282e+38 [m]
+Particle Diameter Condition = gt
+Particle Diameter Condition Two = NA
+Particle Diameter Two = 3.40282e+38 [m]
+Range = Global
+Reduction Factor = 1.0
+Reduction or Max Tracks = Max Tracks
+Show Track Labels = Off
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Symbol Max Time Selection = User Specified
+Symbol Scale Type = Relative
+Symbol Size = 1.0
+Symbol Size Option = Constant
+Symbol Start Time = 10.0 [s]
+Symbol Stop Time = -10.0 [s]
+Symbol Time Interval = 1.0 [s]
+Text Colour = 0, 0, 0
+Text Colour Mode = Default
+Text Height = 0.024
+Track Drawing Mode = Line
+Track End Distance = 0.0 [m]
+Track End Time = 0.0 [s]
+Track File Type = FLUENT
+Track Limit Type = Time
+Track Line Width = 2
+Track Size = 1.0
+Track Start Distance = 0.0 [m]
+Track Start Time = 0.0 [s]
+Track Symbol = Ball
+Transparency = 0.0
+  OBJECT VIEW TRANSFORM:
+  Apply Reflection = Off
+  Apply Rotation = Off
+  Apply Scale = Off
+  Apply Translation = Off
+  Principal Axis = Z
+  Reflection Plane Option = XY Plane
+  Rotation Angle = 0.0 [degree]
+  Rotation Axis From = 0 [m], 0 [m], 0 [m]
+  Rotation Axis To = 0 [m], 0 [m], 0 [m]
+  Rotation Axis Type = Principal Axis
+  Scale Vector = 1 , 1 , 1 
+  Translation Vector = 0 [m], 0 [m], 0 [m]
+  X = 0.0 [m]
+  Y = 0.0 [m]
+  Z = 0.0 [m]
+  END
+END""")
+results2.SendCommand(Command="""PARTICLE TRACK:FLUENT PT for Massless
+Activate Filter = Off
+Any All Condition = Match ALL
+Apply Instancing Transform = On
+Colour = 0.75, 0.75, 0.75
+Colour Map = Default Colour Map
+Colour Mode = Variable
+Colour Scale = Linear
+Colour Variable = Velocity
+Colour Variable Boundary Values = Conservative
+Culling Mode = No Culling
+Domain List = /DOMAIN GROUP:All Domains
+Draw Faces = On
+Draw Lines = Off
+Draw Symbols = On
+Draw Tracks = On
+Filter On Diameter = Off
+Filter On End = Off
+Filter On Start = Off
+Filter On Track Selection = Off
+Injection Filter = injection-0,injection-1
+Input File = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/dp0/FFF/Fluent/default.xml
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Limit Track Option = Up To Current Timestep
+Line Width = 1
+Max = 0.0 [m s^-1]
+Maximum Number of Tracks = 25
+Min = 0.0 [m s^-1]
+Number of Sides = 8
+Option = From File
+Particle Diameter = 3.40282e+38 [m]
+Particle Diameter Condition = gt
+Particle Diameter Condition Two = NA
+Particle Diameter Two = 3.40282e+38 [m]
+Range = Global
+Reduction Factor = 1.0
+Reduction or Max Tracks = Max Tracks
+Show Track Labels = Off
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Symbol Max Time Selection = Current Time
+Symbol Scale Type = Relative
+Symbol Size = 0.5
+Symbol Size Option = Constant
+Symbol Start Time = 10.0 [s]
+Symbol Stop Time = -10.0 [s]
+Symbol Time Interval = 1.0 [s]
+Track Drawing Mode = Line
+Track End Distance = 0.0 [m]
+Track End Time = 0.0 [s]
+Track File Type = FLUENT
+Track Limit Type = Time
+Track Line Width = 2
+Track Size = 1.0
+Track Start Distance = 0.0 [m]
+Track Start Time = 0.0 [s]
+Track Symbol = Ball
+Transparency = 0.0
+  OBJECT VIEW TRANSFORM:
+  Apply Reflection = Off
+  Apply Rotation = Off
+  Apply Scale = Off
+  Apply Translation = Off
+  Principal Axis = Z
+  Reflection Plane Option = XY Plane
+  Rotation Angle = 0.0 [degree]
+  Rotation Axis From = 0 [m], 0 [m], 0 [m]
+  Rotation Axis To = 0 [m], 0 [m], 0 [m]
+  Rotation Axis Type = Principal Axis
+  Scale Vector = 1 , 1 , 1 
+  Translation Vector = 0 [m], 0 [m], 0 [m]
+  X = 0.0 [m]
+  Y = 0.0 [m]
+  Z = 0.0 [m]
+  END
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = C:/Users/SPS VISION/Documents/FFF Setup Output 0005.wmv
+QAnim Save MPEG = Off
+QAnim Looping = Bounce
+QAnim Looping Cycles = 1
+Video Format = wmv
+
+END""")
+results2.SendCommand(Command="""ANIMATION: ANIMATION
+QAnim Object List = /PARTICLE TRACK:FLUENT PT for Massless
+QAnim Frames = 46
+QAnim MPEG Filename = C:/Users/SPS VISION/Documents/FFF Setup Output 0005.wmv
+QAnim Save MPEG = Off
+QAnim Looping = Bounce
+QAnim Looping Cycles = 1
+Video Format = wmv
+END
+>animate quickAnimate""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = C:/Users/SPS VISION/Documents/FFF Setup Output 0005.wmv
+QAnim Save MPEG = On
+QAnim Looping = Bounce
+QAnim Looping Cycles = 1
+Video Format = wmv
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.wmv
+QAnim Save MPEG = On
+QAnim Looping = Bounce
+QAnim Looping Cycles = 1
+Video Format = wmv
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.wmv
+QAnim Save MPEG = On
+QAnim Looping = Bounce
+QAnim Looping Cycles = 1
+Video Format = wmv
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.wmv
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = wmv
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mpg
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mpg
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION: ANIMATION
+QAnim Object List = /PARTICLE TRACK:FLUENT PT for Massless
+QAnim Frames = 59
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+END
+>animate quickAnimate""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/particleFlow.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /PARTICLE TRACK:FLUENT PT for Massless, view=/VIEW:View 1""")
+results2.SendCommand(Command="> autolegend plot=/SURFACE GROUP:arteryWall, view=VIEW:View 1")
+results2.SendCommand(Command="""SURFACE GROUP:arteryWall
+Apply Instancing Transform = On
+Apply Texture = Off
+Blend Texture = On
+Colour = 0.75, 0.75, 0.75
+Colour Map = Default Colour Map
+Colour Mode = Variable
+Colour Scale = Linear
+Colour Variable = Wall Shear
+Colour Variable Boundary Values = Conservative
+Culling Mode = No Culling
+Domain List = /DOMAIN GROUP:All Domains
+Draw Faces = On
+Draw Lines = Off
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Line Colour = 0, 0, 0
+Line Colour Mode = Default
+Line Width = 1
+Location List = wallartery
+Max = 0.0 [Pa]
+Min = 0.0 [Pa]
+Range = Global
+Render Edge Angle = 0 [degree]
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Texture Angle = 0
+Texture Direction = 0 , 1 , 0 
+Texture File =  
+Texture Material = Metal
+Texture Position = 0 , 0 
+Texture Scale = 1
+Texture Type = Predefined
+Tile Texture = Off
+Transform Texture = Off
+Transparency = 0.0
+  OBJECT VIEW TRANSFORM:
+  Apply Reflection = Off
+  Apply Rotation = Off
+  Apply Scale = Off
+  Apply Translation = Off
+  Principal Axis = Z
+  Reflection Plane Option = XY Plane
+  Rotation Angle = 0.0 [degree]
+  Rotation Axis From = 0 [m], 0 [m], 0 [m]
+  Rotation Axis To = 0 [m], 0 [m], 0 [m]
+  Rotation Axis Type = Principal Axis
+  Scale Vector = 1 , 1 , 1 
+  Translation Vector = 0 [m], 0 [m], 0 [m]
+  X = 0.0 [m]
+  Y = 0.0 [m]
+  Z = 0.0 [m]
+  END
+END""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/FFF Setup Output 0005.mp4
+TimeAnim Save MPEG = Off
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/wallShear.mp4
+TimeAnim Save MPEG = On
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/wallShear.mp4
+TimeAnim Save MPEG = Off
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/wallShear.mp4
+TimeAnim Save MPEG = Off
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END
+>animate timestepAnimate""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/wallShear.mp4
+TimeAnim Save MPEG = On
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END""")
+results2.SendCommand(Command="""DATA READER:
+Timestep Match Criterion = Same Step
+Timestep Sync Mode = By Time Value
+Timevalue Match Criterion = Same Value
+END
+ANIMATION: ANIMATION
+TimeAnim Control Case = Case FFF Setup Output 0005
+TimeAnim Control Variable = Timestep
+TimeAnim Frame Interval = All Timesteps
+TimeAnim Frame Spacing = Equal In Time
+TimeAnim Number Of Frames = 21
+TimeAnim Timestep Interval = 1
+TimeAnim Specify Range = Off
+TimeAnim MPEG Filename = C:/Users/SPS VISION/Documents/wallShear.mp4
+TimeAnim Save MPEG = On
+TimeAnim Looping Cycles = 1
+Video Format = mp4
+END
+>animate timestepAnimate""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>hide /SURFACE GROUP:arteryWall, view=/VIEW:View 1""")
+results2.SendCommand(Command="> autolegend plot=/ISOSURFACE:xyplane, view=VIEW:View 1")
+results2.SendCommand(Command="""ISOSURFACE:xyplane
+Apply Instancing Transform = On
+Apply Texture = Off
+Blend Texture = On
+Colour = 0.75, 0.75, 0.75
+Colour Map = Default Colour Map
+Colour Mode = Variable
+Colour Scale = Linear
+Colour Variable = Velocity
+Colour Variable Boundary Values = Conservative
+Culling Mode = No Culling
+Domain List = /DOMAIN GROUP:All Domains
+Draw Faces = On
+Draw Lines = Off
+Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+Lighting = On
+Line Colour = 0, 0, 0
+Line Colour Mode = Default
+Line Width = 1
+Max = 0.0 [m s^-1]
+Min = 0.0 [m s^-1]
+Range = Global
+Render Edge Angle = 0 [degree]
+Specular Lighting = On
+Surface Drawing = Smooth Shading
+Texture Angle = 0
+Texture Direction = 0 , 1 , 0 
+Texture File =  
+Texture Material = Metal
+Texture Position = 0 , 0 
+Texture Scale = 1
+Texture Type = Predefined
+Tile Texture = Off
+Transform Texture = Off
+Transparency = 0.0
+Value = -0.0318504 [m]
+Variable = Z
+Variable Boundary Values = Conservative
+  OBJECT VIEW TRANSFORM:
+  Apply Reflection = Off
+  Apply Rotation = Off
+  Apply Scale = Off
+  Apply Translation = Off
+  Principal Axis = Z
+  Reflection Plane Option = XY Plane
+  Rotation Angle = 0.0 [degree]
+  Rotation Axis From = 0 [m], 0 [m], 0 [m]
+  Rotation Axis To = 0 [m], 0 [m], 0 [m]
+  Rotation Axis Type = Principal Axis
+  Scale Vector = 1 , 1 , 1 
+  Translation Vector = 0 [m], 0 [m], 0 [m]
+  X = 0.0 [m]
+  Y = 0.0 [m]
+  Z = 0.0 [m]
+  END
+END""")
+results2.SendCommand(Command="""# Sending visibility action from ViewUtilities
+>show /ISOSURFACE:xyplane, view=/VIEW:View 1""")
+results2.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.393717, -0.883284, -0.253163, 0.0265677
+    
+  END
+
+END
+
+> update
+ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = Off
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION: ANIMATION
+QAnim Object List = /PARTICLE TRACK:FLUENT PT for Massless,/ISOSURFACE:xyplane
+QAnim Frames = 59
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = Off
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+END
+>animate quickAnimate""")
+results2.SendCommand(Command="""VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.00323652, 0.00321835, -0.00445678
+    Scale = 47.0802
+    Pan = 0, 0
+    Rotation Quaternion = 0.0839741, -0.928716, -0.243694, -0.266557
+    
+  END
+
+END
+
+> update
+ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 2
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mp4
+
+END""")
+results2.SendCommand(Command="""ANIMATION: ANIMATION
+QAnim Object List = /PARTICLE TRACK:FLUENT PT for Massless,/ISOSURFACE:xyplane
+QAnim Frames = 59
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mp4
+END
+>animate quickAnimate""")
+results2.SendCommand(Command="""ANIMATION:ANIMATION
+QAnim MPEG Filename = D:/SPSProjects/ANSYS_projects/bifurcatedArtery_files/user_files/velXY.mp4
+QAnim Save MPEG = On
+QAnim Looping = Loop
+QAnim Looping Cycles = 1
+Video Format = mp4
+
+END""")
+Save(Overwrite=True)
+results2.Exit()
+Save(Overwrite=True)

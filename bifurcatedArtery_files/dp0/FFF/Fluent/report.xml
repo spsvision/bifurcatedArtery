@@ -1,0 +1,186 @@
+<FluentXMLReport>
+<version>
+Fluent
+Version: 3d, dp, pbns, lam, transient (3d, double precision, pressure-based, laminar, transient)
+Release: 19.3.0
+Title: 
+</version>
+
+<Models>
+
+Models
+------
+
+   Model                        Settings                       
+   ---------------------------------------------------------
+   Space                        3D                             
+   Time                         Unsteady, 1st-Order Implicit   
+   Viscous                      Laminar                        
+   Heat Transfer                Disabled                       
+   Solidification and Melting   Disabled                       
+   Species                      Disabled                       
+   Coupled Dispersed Phase      Disabled                       
+   NOx Pollutants               Disabled                       
+   SOx Pollutants               Disabled                       
+   Soot                         Disabled                       
+   Mercury Pollutants           Disabled                       
+   Structure                    Disabled                       
+
+</Models>
+
+<MaterialProperties>
+Material Properties
+-------------------
+
+   Material: blood (fluid)
+
+      Property                        Units     Method     Value(s)                       
+      ---------------------------------------------------------------------------------
+      Density                         kg/m3     constant   1060                           
+      Cp (Specific Heat)              j/kg-k    constant   1006.43                        
+      Thermal Conductivity            w/m-k     constant   0.0242                         
+      Viscosity                       kg/m-s    carreau    (3.313 0.3568 0.056 0.0035 )   
+      Molecular Weight                kg/kmol   constant   28.966                         
+      Thermal Expansion Coefficient   1/k       constant   0                              
+      Speed of Sound                  m/s       none       #f                             
+
+   Material: aluminum (solid)
+
+      Property               Units    Method     Value(s)   
+      ---------------------------------------------------
+      Density                kg/m3    constant   2719       
+      Cp (Specific Heat)     j/kg-k   constant   871        
+      Thermal Conductivity   w/m-k    constant   202.4      
+
+</MaterialProperties>
+
+<CellZoneConditions>
+Cell Zone Conditions
+--------------------
+
+   Zones
+
+      name        id   type    
+      ----------------------
+      fluidzone   4    fluid   
+
+   Setup Conditions
+
+      fluidzone
+
+         Condition       Value   
+         ---------------------
+         Frame Motion?   no      
+         Mesh Motion?    no      
+
+</CellZoneConditions>
+
+<BoundaryConditions>
+Boundary Conditions
+-------------------
+
+   Zones
+
+      name         id   type              
+      ---------------------------------
+      inlet1       5    velocity-inlet    
+      outlet1      6    pressure-outlet   
+      outlet2      7    pressure-outlet   
+      wallartery   8    wall              
+
+   Setup Conditions
+
+      inlet1
+
+         Condition            Value                          
+         -------------------------------------------------
+         Velocity Magnitude   (profile udf inlet_velocity)   
+
+      outlet1
+
+         Condition                 Value   
+         -------------------------------
+         Gauge Pressure (pascal)   13332   
+
+      outlet2
+
+         Condition                 Value   
+         -------------------------------
+         Gauge Pressure (pascal)   13332   
+
+      wallartery
+
+         Condition                  Value   
+         --------------------------------
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+</BoundaryConditions>
+
+<SolverSettings>
+Solver Settings
+---------------
+
+   Equations
+
+      Equation   Solved   
+      -----------------
+      Flow       yes      
+
+   Numerics
+
+      Numeric                         Enabled   
+      ---------------------------------------
+      Absolute Velocity Formulation   yes       
+
+   Unsteady Calculation Parameters
+
+                                             
+      ------------------------------------
+      Time Step (s)                   0.01   
+      Max. Iterations Per Time Step   200    
+
+   Relaxation
+
+      Variable      Relaxation Factor   
+      -------------------------------
+      Pressure      0.3                 
+      Density       1                   
+      Body Forces   1                   
+      Momentum      0.7                 
+
+   Linear Solver
+
+                   Solver     Termination   Residual Reduction   
+      Variable     Type       Criterion     Tolerance            
+      --------------------------------------------------------
+      Pressure     V-Cycle    0.1                                
+      X-Momentum   Flexible   0.1           0.7                  
+      Y-Momentum   Flexible   0.1           0.7                  
+      Z-Momentum   Flexible   0.1           0.7                  
+
+   Pressure-Velocity Coupling
+
+      Parameter   Value    
+      ------------------
+      Type        SIMPLE   
+
+   Discretization Scheme
+
+      Variable   Scheme                
+      ------------------------------
+      Pressure   Second Order          
+      Momentum   Second Order Upwind   
+
+   Solution Limits
+
+      Quantity                    Limit   
+      ---------------------------------
+      Minimum Absolute Pressure   1       
+      Maximum Absolute Pressure   5e+10   
+      Minimum Temperature         1       
+      Maximum Temperature         5000    
+
+</SolverSettings>
+
+</FluentXMLReport>

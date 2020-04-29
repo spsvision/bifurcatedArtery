@@ -1,0 +1,5 @@
+Microsoft (R) C/C++ Optimizing Compiler Version 19.14.26433 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+NMAKE :  U1077: '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.14.26428\bin\HostX86\x64\cl.EXE"' : return code '0x2'
+Stop.
