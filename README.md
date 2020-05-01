@@ -4,7 +4,7 @@ The fluid was blood and the two solid particles were two specs of aluminum. Lami
 The two outlet diverging arteries are set to identical pressures, but one artery is wider in diameter and naturally welcomes more fluid flow.
 ![](bifurcatedArtery_files/user_files/meshs.png)
 ![](bifurcatedArtery_files/user_files/wireframe.png)
-
+The geometry file is found here --> bif_artery.STEP
 ### Wall Shear
 ![](bifurcatedArtery_files/user_files/wall_shear.png)
 ### Velocity Vectors
